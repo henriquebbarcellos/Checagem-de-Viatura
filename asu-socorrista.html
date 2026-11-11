@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Ajuste de espaçamento para separar perfeitamente as categorias */
         .categoria-group {
             margin-top: 32px;
             margin-bottom: 24px;
@@ -35,7 +34,6 @@
                 <span class="pulse-dot"></span>
                 <span>CBMSC • ITÁ</span>
             </div>
-            <!-- EXIBE O NOME DO RESPONSÁVEL VINDO DO IDENT.HTML -->
             <div class="user-badge" style="background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--card-border);">
                 <span id="display-responsavel" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Resp: --</span>
             </div>
@@ -110,7 +108,48 @@
                 </script>
             </div>
 
-            <!-- 5. RESERVAS ASU -->
+            <!-- 5. 02 MACAS RÍGIDAS -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp"> stretcher 02 Macas Rígidas</h3>
+                <script>const itensMacasRigidas = ["02 Macas Rígidas"];</script>
+            </div>
+
+            <!-- 6. CADEIRA DOBRÁVEL PORTÁTIL -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🪑 Cadeira Dobrável Portátil</h3>
+                <script>const itensCadeira = ["Cadeira Dobrável Portátil (conferir)"];</script>
+            </div>
+
+            <!-- 7. COLARES CERVICAIS E COXINS -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🛡️ Colares Cervicais e Coxins</h3>
+                <script>
+                    const itensColaresCoxins = [
+                        "01 Colar PP", "01 Colar P", "01 Colar M", "01 Colar G",
+                        "03 Colares Reguláveis", "03 Cnj Coxins"
+                    ];
+                </script>
+            </div>
+
+            <!-- 8. LANTERNA FIXA -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🔦 Lanterna Fixa</h3>
+                <script>const itensLanternaFixa = ["Lanterna Fixa"];</script>
+            </div>
+
+            <!-- 9. ASPIRADOR AUTOMÁTICO -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🌀 Aspirador Automático</h3>
+                <script>const itensAspirador = ["Aspirador Automático"];</script>
+            </div>
+
+            <!-- 10. 05 CONES RESERVAS -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">⚠️ 05 Cones Reservas</h3>
+                <script>const itensCones = ["05 Cones Reservas"];</script>
+            </div>
+
+            <!-- 11. RESERVAS ASU -->
             <div class="categoria-group">
                 <h3 class="categoria-comp">📦 Reservas ASU</h3>
                 <script>
@@ -121,124 +160,62 @@
                 </script>
             </div>
 
-            <!-- 6. DEMAIS ITENS INDIVIDUAIS -->
+            <!-- 12. KIT QUEIMADURA -->
             <div class="categoria-group">
-                <h3 class="categoria-comp">🛠️ Equipamentos e Kits</h3>
-                
-                <div class="item-card" data-item="Kit Queimadura">
-                    <div class="item-main-row">
-                        <span class="item-nome">Kit Queimadura</span>
-                        <div class="status-options">
-                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
-                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
-                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
-                        </div>
-                    </div>
-                    <div class="obs-container" style="display: none; margin-top: 10px;">
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
-                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
-                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
-                            </label>
-                        </div>
-                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
-                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
-                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
-                        </div>
-                    </div>
-                </div>
+                <h3 class="categoria-comp">🔥 Kit Queimadura</h3>
+                <script>const itensKitQueimadura = ["Kit Queimadura"];</script>
+            </div>
 
-                <div class="item-card" data-item="Aspirador Automático">
-                    <div class="item-main-row">
-                        <span class="item-nome">Aspirador Automático</span>
-                        <div class="status-options">
-                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
-                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
-                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
-                        </div>
-                    </div>
-                    <div class="obs-container" style="display: none; margin-top: 10px;">
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
-                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
-                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
-                            </label>
-                        </div>
-                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
-                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
-                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- 13. KIT PARTO -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">👶 Kit Parto</h3>
+                <script>const itensKitParto = ["Kit Parto"];</script>
+            </div>
 
-                <div class="item-card" data-item="05 Cones Reservas">
-                    <div class="item-main-row">
-                        <span class="item-nome">05 Cones Reservas</span>
-                        <div class="status-options">
-                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
-                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
-                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
-                        </div>
-                    </div>
-                    <div class="obs-container" style="display: none; margin-top: 10px;">
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
-                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
-                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
-                            </label>
-                        </div>
-                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
-                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
-                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- 14. COMPRESSOR TORÁCICO (LUCAS- PCR) -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">⚡ Compressor Torácico (Lucas- PCR)</h3>
+                <script>const itensCompressor = ["Compressor Torácico (Lucas- PCR)"];</script>
+            </div>
 
-                <div class="item-card" data-item="02 Macas Rígidas">
-                    <div class="item-main-row">
-                        <span class="item-nome">02 Macas Rígidas</span>
-                        <div class="status-options">
-                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
-                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
-                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
-                        </div>
-                    </div>
-                    <div class="obs-container" style="display: none; margin-top: 10px;">
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
-                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
-                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
-                            </label>
-                        </div>
-                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
-                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
-                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- 15. TRAVESSEIRO E COBERTOR -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🛌 Travesseiro e Cobertor</h3>
+                <script>const itensTravesseiro = ["Travesseiro e Cobertor"];</script>
+            </div>
 
-                <div class="item-card" data-item="Cadeira Dobrável Portátil">
-                    <div class="item-main-row">
-                        <span class="item-nome">Cadeira Dobrável Portátil (Conferir)</span>
-                        <div class="status-options">
-                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
-                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
-                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
-                        </div>
-                    </div>
-                    <div class="obs-container" style="display: none; margin-top: 10px;">
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
-                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
-                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
-                            </label>
-                        </div>
-                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
-                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
-                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- 16. DEA -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">❤️ DEA</h3>
+                <script>
+                    const itensDea = [
+                        "DEA Vermelho (Ligar e Verificar Bateria)", "01 Par de Pás Adulto (Vermelho)",
+                        "01 Par de Pás Infantil (Vermelho)", "DEA Amarelo (Ligar e Verificar Bateria)",
+                        "01 Par de Pás Adulto (Amarelo)"
+                    ];
+                </script>
+            </div>
+
+            <!-- 17. WHITE MED -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">💨 White Med</h3>
+                <script>
+                    const itensWhiteMed = [
+                        "Nivel de O² >50", "01 Frasco Umidificador", "01 Bolsa Mascara Adulto",
+                        "01 Extensor de Silicone", "01 Óculos", "01 Cateter Nasal", "01 Mascara Infantil"
+                    ];
+                </script>
+            </div>
+
+            <!-- 18. OXIGÊNIO FIXO FURGÃO -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🚑 Oxigênio Fixo Furgão</h3>
+                <script>
+                    const itensOxigenioFurgao = [
+                        "Nível do O² >50", "01 Bolsa Máscara Adulto Pronto Emprego", "01 Frasco Umidificador",
+                        "01 Extensor Silicone", "01 Mascara Infantil", "01 Nadadeiras", "01 Life-Belt", "01 Colete Salva Vidas"
+                    ];
+                </script>
             </div>
 
             <!-- BOTÕES DE AÇÃO DO FORMULÁRIO -->
@@ -312,7 +289,20 @@
             criarCardsItens(itensBolsaAph, '.categoria-group:nth-of-type(2)');
             criarCardsItens(itensSinaisVitais, '.categoria-group:nth-of-type(3)');
             criarCardsItens(itensBancoTraseiro, '.categoria-group:nth-of-type(4)');
-            criarCardsItens(itensReservasAsu, '.categoria-group:nth-of-type(5)');
+            criarCardsItens(itensMacasRigidas, '.categoria-group:nth-of-type(5)');
+            criarCardsItens(itensCadeira, '.categoria-group:nth-of-type(6)');
+            criarCardsItens(itensColaresCoxins, '.categoria-group:nth-of-type(7)');
+            criarCardsItens(itensLanternaFixa, '.categoria-group:nth-of-type(8)');
+            criarCardsItens(itensAspirador, '.categoria-group:nth-of-type(9)');
+            criarCardsItens(itensCones, '.categoria-group:nth-of-type(10)');
+            criarCardsItens(itensReservasAsu, '.categoria-group:nth-of-type(11)');
+            criarCardsItens(itensKitQueimadura, '.categoria-group:nth-of-type(12)');
+            criarCardsItens(itensKitParto, '.categoria-group:nth-of-type(13)');
+            criarCardsItens(itensCompressor, '.categoria-group:nth-of-type(14)');
+            criarCardsItens(itensTravesseiro, '.categoria-group:nth-of-type(15)');
+            criarCardsItens(itensDea, '.categoria-group:nth-of-type(16)');
+            criarCardsItens(itensWhiteMed, '.categoria-group:nth-of-type(17)');
+            criarCardsItens(itensOxigenioFurgao, '.categoria-group:nth-of-type(18)');
         });
 
         const responsavelAtual = localStorage.getItem('responsavel_nome') || 'Militar não identificado';
@@ -447,7 +437,7 @@
             if (naoConferidos > 0) {
                 mostrarModal(
                     'Pendência de Conferência',
-                    'Existem ' + naoConferidos + ' itens sem conferência (nem OK nem ALT selecionados). Por favor, verifique todos os itens antes de finalizar.',
+                    'Existem ' + naoConferidos + ' itens sem conferência. Verifique todos os itens antes de finalizar.',
                     '⚠️'
                 );
                 return;

@@ -77,7 +77,7 @@ renderizarHistorico();
 // FUNÇÃO DE ENVIO AUTOMÁTICO PARA O GOOGLE DRIVE COM MODAL DE CARREGAMENTO MODERNO
 function enviarParaGoogleDrive(index) {
     const reg = historico[index];
-    const urlAPI = "https://script.google.com/macros/s/AKfycbzlHYJKv81KXq3aVbk70sUxqp2b_65MAWBvt4flxk6OTnGR9eARM14bQk0HCwa-bRg/exec";
+    const urlAPI = "https://script.google.com/macros/s/AKfycbwNN2BoRI7YOcrkm2oS9WCwXQXpvp4JJuwJ_fYHi-ElS1qEtT5ohnQjzB0Z_9Vy0h3tgw/exec";
 
     mostrarModalCarregamento("A enviar relatório para o Google Drive...", "Aguarde, a organizar nas pastas do quartel...");
 
@@ -205,7 +205,7 @@ function gerarPDFIndex(index) {
         '</head>' +
         '<body>' +
         '<div class="header">' +
-        '<div><div class="title">CORPO DE BOMBEIROS MILITAR DE SANTA CATARINA</div><div class="subtitle">6º BBM - 2ª Companhia - Itá (SC)</div></div>' +
+        '<div><div class="title">CORPO DE BOMBEIROS MILITAR DE SANTA CATARINA</div><div class="subtitle">6º BBM - Itá (SC)</div></div>' +
         '<div style="text-align: right; font-weight: bold; font-size: 14px;">CONFERÊNCIA DE VIATURA</div>' +
         '</div>' +
         '<div class="card">' +
