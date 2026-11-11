@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Checklist Operacional - CBMSC</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte moderna Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <main class="app-viewport">
+       <!-- HEADER FIXO MODERNO -->
+        <header class="app-header">
+            <div class="badge-cbmsc">
+                <span class="pulse-dot"></span>
+                <span>CBMSC • ITÁ</span>
+            </div>
+            <h1>Checagem de Viaturas</h1>
+            <p>Selecione a unidade para iniciar a conferência</p>
+        </header>
+
+        <!-- SELEÇÃO DE VIATURA (TELA 1) -->
+        <section id="screen-1" class="screen active">
+            <div class="viatura-grid">
+                
+                <!-- CARD ASU -->
+                <button type="button" class="card-viatura" onclick="escolherViatura('ASU')">
+                    <div class="card-header">
+                        <span class="tag-status">APH</span>
+                        <div class="icon-wrapper">🚑</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>ASU-531</h2>
+                        <span class="description">Auto Socorro de Urgência</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Iniciar Checklist</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+
+                <!-- CARD ABTR -->
+                <button type="button" class="card-viatura" onclick="escolherViatura('ABTR')">
+                    <div class="card-header">
+                        <span class="tag-status">RESGATE / INCÊNDIO</span>
+                        <div class="icon-wrapper">🚒</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>ABTR-207</h2>
+                        <span class="description">Auto Bomba Tanque Resgate</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Iniciar Checklist</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+
+                <!-- CARD GUARDA-VIDAS (OPERAÇÃO VERANEIO) - DIRETO PARA IDENT.HTML -->
+                <button type="button" class="card-viatura" onclick="escolherGuardaVidas()">
+                    <div class="card-header">
+                        <span class="tag-status" style="background: rgba(59,130,246,0.2); color: #60a5fa;">OP. VERANEIO</span>
+                        <div class="icon-wrapper">🏄‍♂️</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>Guarda-Vidas</h2>
+                        <span class="description">Material de Praia e Salvamento</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Iniciar Checklist</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+
+                <!-- CARD HISTÓRICO DE PLANTÃO -->
+                <button type="button" class="card-viatura" onclick="window.location.href='historico.html'">
+                    <div class="card-header">
+                        <span class="tag-status" style="background: rgba(255,255,255,0.08); color: var(--text-muted);">REGISTROS</span>
+                        <div class="icon-wrapper">📋</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>Histórico</h2>
+                        <span class="description">Conferências salvas no dispositivo</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Ver Histórico</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- RODAPÉ MODERNO / SUPORTE -->
+        <footer style="margin-top: 40px; margin-bottom: 20px; text-align: center; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+                <p style="color: var(--text-muted, #94a3b8); font-size: 0.8rem; font-weight: 500; margin: 0;">
+                    Desenvolvido por <strong style="color: #fff; font-weight: 600;">SD Barcellos</strong> • 6º BBM (Itá)
+                </p>
+                <div style="display: flex; gap: 15px; align-items: center; margin-top: 4px;">
+                    <!-- LINK DIRETO PARA O SEU WHATSAPP COM MENSAGEM AUTOMÁTICA -->
+                    <a href="https://wa.me/5522997085774?text=Olá%20SD%20Barcellos,%20preciso%20de%20ajuda%20com%20o%20sistema%20de%20checklist." target="_blank" style="color: var(--text-muted, #94a3b8); font-size: 0.75rem; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#22c55e'" onmouseout="this.style.color='#94a3b8'">
+                        💬 Relatar Problema / Ajuda
+                    </a>
+                    <span style="color: rgba(255,255,255,0.2);">•</span>
+                    <span style="color: var(--text-muted, #94a3b8); font-size: 0.75rem;">
+                        CBMSC • Sistema Interno
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        function escolherViatura(veiculo) {
+            localStorage.setItem('viatura_selecionada', veiculo);
+            window.location.href = 'subcategoria.html';
+        }
+
+        function escolherGuardaVidas() {
+            localStorage.setItem('viatura_selecionada', 'Guarda-Vidas');
+            localStorage.setItem('funcao_selecionada', 'Guarda-Vidas (Op. Veraneio)');
+            window.location.href = 'ident.html';
+        }
+    </script>
+</body>
+</html>

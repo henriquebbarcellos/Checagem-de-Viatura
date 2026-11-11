@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Identificação - CBMSC ITÁ</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte moderna Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <main class="app-viewport">
+        <!-- HEADER FIXO MODERNO -->
+        <header class="app-header">
+            <div class="badge-cbmsc">
+                <span class="pulse-dot"></span>
+                <span>CBMSC • ITÁ</span>
+            </div>
+        </header>
+
+        <!-- CARTÃO DO FORMULÁRIO -->
+        <div class="card-form">
+            <div class="form-header">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px;">
+                    <span class="tag-viatura">FUNÇÃO: <strong id="lbl-funcao">--</strong></span>
+                    <!-- SELO VISUAL DE DATA E HORA -->
+                    <span class="tag-data-hora" id="lbl-data-hora">--/--/---- --:--</span>
+                </div>
+                <h2>Quem está assumindo?</h2>
+                <p>Informe o seu nome ou graduação para registrar a responsabilidade da conferência.</p>
+            </div>
+
+            <!-- DROPDOWN DE SELEÇÃO -->
+            <div class="form-group">
+                <label for="select-responsavel">Militar / Bombeiro Comunitário</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <select id="select-responsavel" onchange="verificarOutro(this.value)">
+                        <option value="" disabled selected>Selecione o seu nome...</option>
+
+                        <!-- LISTA DE BOMBEIROS MILITARES -->
+                        <optgroup label="Bombeiro Militar">
+                            <option value="Sgt Ludvig">Sgt Ludvig</option>
+                            <option value="Sgt Jairo">Sgt Jairo</option>
+                            <option value="Cb Murari">Cb Murari</option>
+                            <option value="Cb Von Muller">Cb Von Muller</option>
+                            <option value="Cb Schiavini">Cb Schiavini</option>
+                            <option value="Sd Grigol">Sd Grigol</option>
+                            <option value="Sd Cassio">Sd Cassio</option>
+                            <option value="Sd Borger">Sd Borger</option>
+                            <option value="Sd Duarte">Sd Duarte</option>
+                            <option value="Sd Barcellos">Sd Barcellos</option>
+                            <option value="Sd Rigo">Sd Rigo</option>
+                            <option value="BM SEARA">BM SEARA</option>
+                        </optgroup>
+
+                        <!-- LISTA DE BOMBEIROS PROFISSIONAIS CIVIS -->
+                        <optgroup label="Bombeiro Profissional Civil">
+                            <option value="BCP Borba">BCP Borba</option>
+                            <option value="BCP Canal">BCP Canal</option>
+                            <option value="BCP Josimar">BCP Josimar</option>
+                            <option value="BCP Juliano">BCP Juliano</option>
+                            <option value="BCP Luizana">BCP Luizana</option>
+                        </optgroup>
+
+                        <!-- LISTA DE BOMBEIROS COMUNITÁRIOS -->
+                        <optgroup label="Bombeiro Comunitário">
+                            <option value="BC Assunção">BC Assunção</option>
+                            <option value="BC Oliveira">BC Oliveira</option>
+                            <option value="BC Bertuzzi">BC Bertuzzi</option>
+                            <option value="BC Gass">BC Gass</option>
+                            <option value="BC Gelson">BC Gelson</option>
+                            <option value="BC Gilberto">BC Gilberto</option>
+                            <option value="BC Luan">BC Luan</option>
+                            <option value="BC Picoli">BC Picoli</option>
+                            <option value="BC Vailon">BC Vailon</option>
+                            <option value="BC Washington">BC Washington</option>
+                            <option value="BC Zonta">BC Zonta</option>
+                            <option value="BC Emili">BC Emili</option>
+                            <option value="BC Feliciano">BC Feliciano</option>
+                            <option value="BC Noara">BC Noara</option>
+                            <option value="BC Campos">BC Campos</option>
+                            <option value="BC Machado">BC Machado</option>
+                            <option value="BC SEARA">BC SEARA</option>
+                        </optgroup>
+                        
+                        <option value="OUTRO">➕ Outro (Digitar manualmente)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- CAMPO MANUAL (FICA OCULTO POR PADRÃO) -->
+            <div class="form-group" id="group-outro-nome" style="display: none; margin-top: 12px;">
+                <label for="txt-responsavel-manual">Nome / Graduação Manual</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">✍️</span>
+                    <input 
+                        type="text" 
+                        id="txt-responsavel-manual" 
+                        placeholder="Digite seu posto e nome..." 
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <!-- BOTÃO VOLTAR MINIMALISTA (Se for guarda-vidas volta ao index, senão vai para subcategoria) -->
+                <button type="button" class="btn-icon-only" onclick="voltarPagina()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>
+                
+                <!-- BOTÃO PARA INICIAR CHECKLIST -->
+                <button type="button" class="btn-submit" onclick="confirmarResponsavel()">
+                    <span>Ir para Checklist</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL DE ALERTA PROFISSIONAL -->
+    <div id="modal-alerta" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: #181a20; border: 1px solid var(--card-border); padding: 28px; border-radius: 16px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); animation: modalPop 0.25s ease-out;">
+            <div id="modal-icone" style="font-size: 2.5rem; margin-bottom: 12px;">⚠️</div>
+            <h3 id="modal-titulo" style="color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">Atenção Operacional</h3>
+            <p id="modal-texto-aviso" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5;"></p>
+            <button type="button" onclick="fecharModalAlerta()" style="background: var(--primary-red); color: #fff; border: none; padding: 14px 20px; border-radius: 10px; font-weight: 700; width: 100%; cursor: pointer; font-size: 0.95rem; transition: background 0.2s;">Entendido</button>
+        </div>
+    </div>
+
+    <style>
+        @keyframes modalPop {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script>
+        // 1. Pega a função selecionada na tela anterior
+        const funcao = localStorage.getItem('funcao_selecionada') || localStorage.getItem('viatura_selecionada') || 'ASU-531 Socorrista';
+        document.getElementById('lbl-funcao').innerText = funcao;
+
+        // 2. Captura a data e hora atual do dispositivo
+        function obterDataHoraAtual() {
+            const agora = new Date();
+            const data = agora.toLocaleDateString('pt-BR');
+            const hora = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            return `${data} às ${hora}`;
+        }
+
+        // 3. Exibe a data/hora assim que a página carrega
+        const dataHoraFormatada = obterDataHoraAtual();
+        document.getElementById('lbl-data-hora').innerText = dataHoraFormatada;
+
+        // Funções do Modal Profissional
+        function mostrarModal(titulo, mensagem, icone = '⚠️') {
+            document.getElementById('modal-titulo').innerText = titulo;
+            document.getElementById('modal-texto-aviso').innerText = mensagem;
+            document.getElementById('modal-icone').innerText = icone;
+            document.getElementById('modal-alerta').style.display = 'flex';
+        }
+
+        function fecharModalAlerta() {
+            document.getElementById('modal-alerta').style.display = 'none';
+        }
+
+        // 4. Lógica do botão voltar inteligente
+        function voltarPagina() {
+            if (funcao.includes('Guarda-Vidas')) {
+                window.location.href = 'index.html';
+            } else {
+                window.location.href = 'subcategoria.html';
+            }
+        }
+
+        // 5. Exibe o campo de texto apenas se escolher "Outro (Digitar manualmente)"
+        function verificarOutro(valor) {
+            const groupOutro = document.getElementById('group-outro-nome');
+            if (valor === 'OUTRO') {
+                groupOutro.style.display = 'flex';
+                document.getElementById('txt-responsavel-manual').focus();
+            } else {
+                groupOutro.style.display = 'none';
+            }
+        }
+
+        // 6. Confirma a seleção e avança para a página de checklist correspondente
+        function confirmarResponsavel() {
+            const select = document.getElementById('select-responsavel');
+            let nomeFinal = select.value;
+
+            if (nomeFinal === 'OUTRO') {
+                nomeFinal = document.getElementById('txt-responsavel-manual').value.trim();
+            }
+
+            if (!nomeFinal) {
+                mostrarModal('Atenção', 'Por favor, selecione seu nome ou digite no campo manual.', '⚠️');
+                return;
+            }
+
+            // Salva nome e data/hora no navegador
+            localStorage.setItem('responsavel_nome', nomeFinal);
+            localStorage.setItem('conferencia_data_hora', dataHoraFormatada);
+
+            // Redireciona para a página específica da função
+            if (funcao.includes('Guarda-Vidas')) {
+                window.location.href = 'guarda-vidas.html';
+            } else if (funcao.includes('ASU-531 Motorista')) {
+                window.location.href = 'asu-motorista.html';
+            } else if (funcao.includes('ASU-531 Socorrista')) {
+                window.location.href = 'asu-socorrista.html';
+            } else if (funcao.includes('ABTR-207 Motorista')) {
+                window.location.href = 'abtr-motorista.html';
+            } else {
+                window.location.href = 'abtr-guarnicao.html';
+            }
+        }
+    </script>
+</body>
+</html>

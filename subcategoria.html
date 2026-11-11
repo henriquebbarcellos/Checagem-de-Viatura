@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Função / Subcategoria - CBMSC ITÁ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <main class="app-viewport">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="badge-cbmsc">
+                <span class="pulse-dot"></span>
+                <span id="lbl-viatura-badge">CBMSC • ITÁ</span>
+            </div>
+            <h1>Selecione a Função</h1>
+            <p>Escolha o setor ou responsabilidade da conferência</p>
+        </header>
+
+        <!-- GRID DE SUBCATEGORIAS -->
+        <section class="screen active">
+            <div class="viatura-grid" id="container-subcategorias">
+                <!-- O JavaScript vai injetar os botões aqui de acordo com a viatura -->
+            </div>
+
+            <!-- BOTÃO VOLTAR -->
+            <div style="margin-top: 20px;">
+                <button type="button" class="btn-voltar-moderno" onclick="window.location.href='index.html'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Voltar para Viaturas</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 1. Lê a viatura selecionada na tela anterior (ex: 'ASU' ou 'ABTR')
+        const veiculo = localStorage.getItem('viatura_selecionada') || 'ASU';
+        
+        // Atualiza a badge do topo
+        document.getElementById('lbl-viatura-badge').innerText = `CBMSC • ITÁ (${veiculo})`;
+
+        const container = document.getElementById('container-subcategorias');
+
+        // 2. Define as subcategorias/funções para cada viatura
+        if (veiculo === 'ASU') {
+            container.innerHTML = `
+                <!-- CARD MOTORISTA -->
+                <button type="button" class="card-viatura" onclick="escolherFuncao('ASU-531 Motorista')">
+                    <div class="card-header">
+                        <span class="tag-status">CABINE / MECÂNICA</span>
+                        <div class="icon-wrapper">🚘</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>Motorista</h2>
+                        <span class="description">ASU-531 • Inspeção da cabine e viatura</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Selecionar</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+
+                <!-- CARD SOCORRISTA -->
+                <button type="button" class="card-viatura" onclick="escolherFuncao('ASU-531 Socorrista')">
+                    <div class="card-header">
+                        <span class="tag-status">SALÃO DE ATENDIMENTO</span>
+                        <div class="icon-wrapper">🩺</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>Socorrista</h2>
+                        <span class="description">ASU-531 • Materiais APH e resgate</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Selecionar</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+            `;
+        } else if (veiculo === 'ABTR') {
+            container.innerHTML = `
+                <!-- CARD MOTORISTA ABTR -->
+                <button type="button" class="card-viatura" onclick="escolherFuncao('ABTR-207 Motorista')">
+                    <div class="card-header">
+                        <span class="tag-status">CABINE / BOMBA</span>
+                        <div class="icon-wrapper">⚙️</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>Motorista</h2>
+                        <span class="description">ABTR-207 • Bomba, painel e mecânica</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Selecionar</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+
+                <!-- CARD COMBATENTE / RESGATISTA -->
+                <button type="button" class="card-viatura" onclick="escolherFuncao('ABTR-207 Guarnição')">
+                    <div class="card-header">
+                        <span class="tag-status">INCÊNDIO / RESGATE</span>
+                        <div class="icon-wrapper">👨‍🚒</div>
+                    </div>
+                    <div class="card-body">
+                        <h2>Resgatista/Combatente</h2>
+                        <span class="description">ABTR-207 • Materiais e equipamentos</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>Selecionar</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </button>
+            `;
+        }
+
+        // 3. Salva a subcategoria/função e avança para ident.html
+        function escolherFuncao(funcao) {
+            localStorage.setItem('funcao_selecionada', funcao);
+            window.location.href = 'ident.html';
+        }
+    </script>
+</body>
+</html>

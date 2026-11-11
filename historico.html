@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Histórico de Conferências - CBMSC ITÁ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <main class="app-viewport">
+        <!-- HEADER FIXO MODERNO -->
+        <header class="app-header">
+            <div class="badge-cbmsc">
+                <span class="pulse-dot"></span>
+                <span>CBMSC • ITÁ</span>
+            </div>
+        </header>
+
+        <!-- CARTÃO TÍTULO -->
+        <div class="card-form" style="margin-bottom: 20px;">
+            <div class="form-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2>Histórico de Plantão</h2>
+                    <p>Conferências de viaturas registradas no dispositivo.</p>
+                </div>
+                <!-- BOTÃO DE LIMPAR TUDO -->
+                <button type="button" class="btn-icon-only" onclick="abrirModalGlobal()" title="Limpar Todo o Histórico" style="background: rgba(255,42,42,0.1); border-color: rgba(255,42,42,0.3);">
+                    🗑️
+                </button>
+            </div>
+        </div>
+
+        <!-- LISTA DE HISTÓRICO -->
+        <div id="lista-historico" style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- Os registros injetados via JavaScript aparecem aqui -->
+        </div>
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="form-actions" style="margin-top: 24px; margin-bottom: 40px; display: flex; gap: 10px;">
+            <button type="button" class="btn-icon-only" onclick="window.location.href='asu-socorrista.html'" title="Voltar ao Checklist">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <button type="button" class="btn-submit" onclick="window.location.href='index.html'">
+                <span>Voltar ao Início</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- MODAL FIXO DIRETAMENTE NO HTML -->
+    <div id="modal-confirmacao" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: #181a20; border: 1px solid var(--card-border); padding: 28px; border-radius: 16px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); animation: modalPop 0.25s ease-out;">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">🗑️</div>
+            <h3 id="modal-titulo" style="color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">Limpar Histórico</h3>
+            <p id="modal-texto" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5;">Deseja realmente apagar todo o histórico de conferências deste dispositivo?</p>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" onclick="fecharModalGlobal()" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--card-border); padding: 12px; border-radius: 10px; font-weight: 600; flex: 1; cursor: pointer;">Cancelar</button>
+                <button type="button" id="btn-confirmar-acao" style="background: var(--primary-red); color: #fff; border: none; padding: 12px; border-radius: 10px; font-weight: 700; flex: 1; cursor: pointer;">Sim, apagar</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes modalPop {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script>
+        // Funções globais de controlo do Modal integradas no HTML
+        let funcaoConfirmacaoAtual = null;
+
+        function mostrarModalCustom(titulo, texto, callbackSim) {
+            document.getElementById('modal-titulo').innerText = titulo;
+            document.getElementById('modal-texto').innerText = texto;
+            funcaoConfirmacaoAtual = callbackSim;
+            document.getElementById('modal-confirmacao').style.display = 'flex';
+        }
+
+        function fecharModalGlobal() {
+            document.getElementById('modal-confirmacao').style.display = 'none';
+            funcaoConfirmacaoAtual = null;
+        }
+
+        document.getElementById('btn-confirmar-acao').onclick = function() {
+            if (funcaoConfirmacaoAtual) {
+                funcaoConfirmacaoAtual();
+            }
+            fecharModalGlobal();
+        };
+
+        // Função chamada pelo botão de limpar tudo no topo
+        function abrirModalGlobal() {
+            mostrarModalCustom(
+                'Limpar Histórico',
+                'Deseja realmente apagar todo o histórico de conferências deste dispositivo?',
+                function() {
+                    localStorage.removeItem('cbmsc_historico_conferencias');
+                    if (typeof historico !== 'undefined') {
+                        historico = [];
+                    }
+                    if (typeof renderizarHistorico === 'function') {
+                        renderizarHistorico();
+                    } else {
+                        location.reload();
+                    }
+                }
+            );
+        }
+    </script>
+
+    <!-- Importação do teu historico.js original -->
+    <script src="historico.js"></script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+:root {
+    --bg-dark: #0a0b0e;
+    --card-bg: rgba(22, 26, 35, 0.75);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --primary-red: #ff2a2a;
+    --primary-red-glow: rgba(255, 42, 42, 0.25);
+    --text-main: #ffffff;
+    --text-muted: #8e99a8;
+    --radius-lg: 18px;
+    --radius-sm: 8px;
+    --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 16px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Efeito de iluminação de fundo */
+.background-glow {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, var(--primary-red-glow) 0%, rgba(0,0,0,0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.app-viewport {
+    width: 100%;
+    max-width: 440px;
+    z-index: 1;
+    padding-bottom: 120px; /* Dá espaço livre abaixo do cartão */
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* BADGE CBMSC • ITÁ (VERSÃO AMPLIADA) */
+.badge-cbmsc {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 42, 42, 0.12);
+    border: 1.5px solid rgba(255, 42, 42, 0.35);
+    padding: 8px 18px; /* Aumentou o tamanho da pílula */
+    border-radius: 24px;
+    font-size: 0.9rem; /* Aumentou o tamanho do texto */
+    font-weight: 800;  /* Deixou o texto mais encorpado */
+    letter-spacing: 1.5px;
+    color: var(--primary-red);
+    margin-bottom: 14px;
+}
+
+/* PONTO PISCANTE MAIOR */
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-red);
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+.app-header h1 {
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.app-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Grid de Viaturas */
+.viatura-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Card Viatura */
+.card-viatura {
+    width: 100%;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: left;
+    color: var(--text-main);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Efeito de toque no celular */
+.card-viatura:active {
+    transform: scale(0.98);
+    border-color: var(--primary-red);
+    box-shadow: 0 0 20px var(--primary-red-glow);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tag-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.icon-wrapper {
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-body h2 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.card-body .description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--primary-red);
+}
+
+.card-footer svg {
+    transition: transform 0.2s ease;
+}
+
+.card-viatura:active .card-footer svg {
+    transform: translateX(4px);
+}
+
+/* BOTÃO VOLTAR MINIMALISTA E TÁTICO */
+.btn-voltar-moderno {
+    width: 100%;
+    height: 50px;
+    margin-top: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-voltar-moderno:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+}
+
+/* CARTÃO DE FORMULÁRIO (TÁTICO / MODERNO) */
+.card-form {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tag-viatura {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    letter-spacing: 1px;
+    background: rgba(255, 42, 42, 0.1);
+    border: 1px solid rgba(255, 42, 42, 0.25);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.input-wrapper input {
+    width: 100%;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 0 16px 0 46px;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--primary-red);
+    background: rgba(255, 42, 42, 0.04);
+    box-shadow: 0 0 12px var(--primary-red-glow);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-icon-only {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.btn-submit {
+    flex: 1;
+    height: 52px;
+    background: var(--primary-red);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px var(--primary-red-glow);
+}
+
+.tag-data-hora {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* ESTILIZAÇÃO DO DROPDOWN SELECT MODERNO */
+.input-wrapper select {
+    width: 100%;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0 16px 0 52px;
+    color: var(--text-main);
+    font-size: 1.05rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* Remove a seta feia padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%20%238e99a8' stroke-width='2.5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+}
+
+.input-wrapper select:focus {
+    border-color: var(--primary-red);
+    background-color: rgba(255, 42, 42, 0.04);
+    box-shadow: 0 0 12px var(--primary-red-glow);
+}
+
+/* Estilo dos itens dentro da lista suspensa */
+.input-wrapper select option,
+.input-wrapper select optgroup {
+    background-color: #161a23;
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* ESTILOS ESPECÍFICOS PARA OS ITENS DO CHECKLIST */
+.checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.categoria-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.categoria-titulo {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-muted, #9ca3af);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 10px;
+}
+
+.item-card {
+    background: var(--card-bg, rgba(18, 20, 30, 0.75));
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.item-nome {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main, #f3f4f6);
+    flex: 1;
+}
+
+.status-options {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.btn-status {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 8px;
+    border: 1px solid var(--card-border, rgba(255, 255, 255, 0.08));
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted, #9ca3af);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-status:active {
+    transform: scale(0.95);
+}
+
+/* Cores dos Botões Ativos no Checklist */
+.btn-status.ok.active {
+    background: #10b981;
+    color: #ffffff;
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.btn-status.alt.active {
+    background: var(--primary-red, #ff2a2a);
+    color: #ffffff;
+    border-color: var(--primary-red, #ff2a2a);
+    box-shadow: 0 0 10px var(--primary-red-glow, rgba(255, 42, 42, 0.4));
+}
+
+.btn-status.obs.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.obs-container {
+    width: 100%;
+}
+
+.input-obs {
+    width: 100%;
+    height: 42px;
+    background: rgba(255, 42, 42, 0.05);
+    border: 1px solid rgba(255, 42, 42, 0.3);
+    border-radius: 8px;
+    padding: 0 12px;
+    color: var(--text-main, #f3f4f6);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.input-obs:focus {
+    border-color: var(--primary-red, #ff2a2a);
+    box-shadow: 0 0 8px var(--primary-red-glow, rgba(255, 42, 42, 0.4));
+}

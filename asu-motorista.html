@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Checklist ASU-531 Motorista - CBMSC ITÁ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <main class="app-viewport">
+        <!-- HEADER FIXO MODERNO -->
+        <header class="app-header">
+            <div class="badge-cbmsc">
+                <span class="pulse-dot"></span>
+                <span>CBMSC • ITÁ</span>
+            </div>
+            <!-- EXIBE O NOME DO RESPONSÁVEL VINDO DO IDENT.HTML -->
+            <div class="user-badge" style="background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--card-border);">
+                <span id="display-responsavel" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Resp: --</span>
+            </div>
+        </header>
+
+        <!-- CARTÃO DE INFO DA VIATURA -->
+        <div class="card-form" style="margin-bottom: 20px;">
+            <div class="form-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span class="tag-viatura">ASU-531 • MOTORISTA</span>
+                    <h2 style="margin-top: 6px; font-size: 1.1rem;">Conferência de Viatura e Mecânica</h2>
+                </div>
+                <span id="display-data-hora" style="font-size: 0.75rem; color: var(--text-muted);">--/--/---- --:--</span>
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO DE CHECKLIST -->
+        <form id="form-checklist">
+            
+            <!-- CATEGORIA ASU-531 -->
+            <div class="categoria-group">
+                <h3 class="categoria-comp">🚑 ASU-531</h3>
+                
+                <div class="item-card" data-item="Limpeza">
+                    <div class="item-main-row">
+                        <span class="item-nome">Limpeza</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Avarias">
+                    <div class="item-main-row">
+                        <span class="item-nome">Avarias</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Calibragem Pneus">
+                    <div class="item-main-row">
+                        <span class="item-nome">Calibragem Pneus</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Nível Óleo do Motor">
+                    <div class="item-main-row">
+                        <span class="item-nome">Nível Óleo do Motor</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Água Radiador">
+                    <div class="item-main-row">
+                        <span class="item-nome">Água Radiador</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Combustivel">
+                    <div class="item-main-row">
+                        <span class="item-nome">Combustivel</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Arla">
+                    <div class="item-main-row">
+                        <span class="item-nome">Arla</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Água Limpador Parabrisa">
+                    <div class="item-main-row">
+                        <span class="item-nome">Água Limpador Parabrisa</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Funcionamento Limpador">
+                    <div class="item-main-row">
+                        <span class="item-nome">Funcionamento Limpador</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Sinalização de Tráfego (Faróis, Lanternas e Piscas)">
+                    <div class="item-main-row">
+                        <span class="item-nome">Sinalização de Tráfego (Faróis, Lanternas e Piscas)</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Sinalização de Emergência (Sirene, Giroflex, Estrobos, Faroletes Embarque)">
+                    <div class="item-main-row">
+                        <span class="item-nome">Sinalização de Emergência (Sirene, Giroflex, Estrobos, Faroletes Embarque)</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Iluminação Furgão">
+                    <div class="item-main-row">
+                        <span class="item-nome">Iluminação Furgão</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Camera de Ré">
+                    <div class="item-main-row">
+                        <span class="item-nome">Camera de Ré</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Controle Portão">
+                    <div class="item-main-row">
+                        <span class="item-nome">Controle Portão</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Chave de Roda">
+                    <div class="item-main-row">
+                        <span class="item-nome">Chave de Roda</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Macaco">
+                    <div class="item-main-row">
+                        <span class="item-nome">Macaco</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Estepe">
+                    <div class="item-main-row">
+                        <span class="item-nome">Estepe</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Manual Veicullo">
+                    <div class="item-main-row">
+                        <span class="item-nome">Manual Veiculo</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Cartão Abastecimento">
+                    <div class="item-main-row">
+                        <span class="item-nome">Cartão Abastecimento</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Documento Impresso">
+                    <div class="item-main-row">
+                        <span class="item-nome">Documento Impresso</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Ficha de Acidente">
+                    <div class="item-main-row">
+                        <span class="item-nome">Ficha de Acidente</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="Manual do Veículo">
+                    <div class="item-main-row">
+                        <span class="item-nome">Manual do Veículo</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="06 cones de sinalização retráteis">
+                    <div class="item-main-row">
+                        <span class="item-nome">06 cones de sinalização retráteis</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="funcionamento rádio viatura">
+                    <div class="item-main-row">
+                        <span class="item-nome">funcionamento rádio viatura</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card" data-item="extintor PQS">
+                    <div class="item-main-row">
+                        <span class="item-nome">extintor PQS</span>
+                        <div class="status-options">
+                            <button type="button" class="btn-status ok" onclick="setStatus(this, 'OK')">OK</button>
+                            <button type="button" class="btn-status alt" onclick="setStatus(this, 'ALT')">ALT</button>
+                            <button type="button" class="btn-status obs" onclick="toggleObs(this)">Obs 💬</button>
+                        </div>
+                    </div>
+                    <div class="obs-container" style="display: none; margin-top: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="input-obs" placeholder="Descreva a alteração..." style="flex: 1;">
+                            <label style="background: rgba(255,255,255,0.08); border: 1px solid var(--card-border); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;" title="Tirar Foto">
+                                📷 <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="capturarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="preview-foto-container" style="margin-top: 8px; display: none;">
+                            <img src="" alt="Foto da Alteração" style="max-height: 80px; border-radius: 6px; border: 1px solid var(--card-border);">
+                            <button type="button" onclick="removerFotoItem(this)" style="background: rgba(255,42,42,0.2); color: #ff2a2a; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 8px;">Remover Foto</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BOTÕES DE AÇÃO DO FORMULÁRIO -->
+            <div class="form-actions" style="margin-top: 30px; margin-bottom: 40px; display: flex; gap: 10px;">
+                <button type="button" class="btn-icon-only" onclick="window.location.href='ident.html'" title="Voltar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>
+                <button type="button" class="btn-submit" onclick="finalizarChecklistMotorista()">
+                    <span>Finalizar e Salvar</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- MODAL DE ALERTA PROFISSIONAL -->
+    <div id="modal-alerta" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: #181a20; border: 1px solid var(--card-border); padding: 28px; border-radius: 16px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); animation: modalPop 0.25s ease-out;">
+            <div id="modal-icone" style="font-size: 2.5rem; margin-bottom: 12px;">⚠️</div>
+            <h3 id="modal-titulo" style="color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">Atenção Operacional</h3>
+            <p id="modal-texto-aviso" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5;"></p>
+            <button type="button" id="modal-btn-acao" onclick="fecharModalAlerta()" style="background: var(--primary-red); color: #fff; border: none; padding: 14px 20px; border-radius: 10px; font-weight: 700; width: 100%; cursor: pointer; font-size: 0.95rem; transition: background 0.2s;">Entendido</button>
+        </div>
+    </div>
+
+    <style>
+        @keyframes modalPop {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script>
+        // Puxa o nome e a data/hora gravados pelo ident.html
+        const responsavelAtual = localStorage.getItem('responsavel_nome') || 'Militar não identificado';
+        const dataHoraAtual = localStorage.getItem('conferencia_data_hora') || '--/--/---- --:--';
+
+        // Exibe nos elementos do ecrã
+        document.getElementById('display-responsavel').innerText = responsavelAtual;
+        document.getElementById('display-data-hora').innerText = dataHoraAtual;
+
+        // Funções do Modal Profissional
+        let acaoAposFechar = null;
+
+        function mostrarModal(titulo, mensagem, icone = '⚠️', callback = null) {
+            document.getElementById('modal-titulo').innerText = titulo;
+            document.getElementById('modal-texto-aviso').innerText = mensagem;
+            document.getElementById('modal-icone').innerText = icone;
+            acaoAposFechar = callback;
+            document.getElementById('modal-alerta').style.display = 'flex';
+        }
+
+        function fecharModalAlerta() {
+            document.getElementById('modal-alerta').style.display = 'none';
+            if (acaoAposFechar) {
+                const cb = acaoAposFechar;
+                acaoAposFechar = null;
+                cb();
+            }
+        }
+
+        // Função para alternar o status do botão (OK / ALT)
+        function setStatus(button, status) {
+            const optionsRow = button.parentElement;
+            const buttons = optionsRow.querySelectorAll('.btn-status');
+            
+            buttons.forEach(b => {
+                if(!b.classList.contains('obs')) b.classList.remove('active');
+            });
+            
+            button.classList.add('active');
+        }
+
+        // Função para abrir/fechar a gaveta de observação
+        function toggleObs(button) {
+            button.classList.toggle('active');
+            const itemCard = button.closest('.item-card');
+            const obsContainer = itemCard.querySelector('.obs-container');
+            
+            if (obsContainer.style.display === 'none') {
+                obsContainer.style.display = 'block';
+            } else {
+                obsContainer.style.display = 'none';
+            }
+        }
+
+        // Função para capturar, comprimir e pré-visualizar a foto do item
+        function capturarFotoItem(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imgTemp = new Image();
+                    imgTemp.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const MAX_WIDTH = 800;
+                        const MAX_HEIGHT = 800;
+                        let width = imgTemp.width;
+                        let height = imgTemp.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(imgTemp, 0, 0, width, height);
+
+                        const dataUrlComprimida = canvas.toDataURL('image/jpeg', 0.7);
+
+                        const itemCard = input.closest('.item-card');
+                        const previewContainer = itemCard.querySelector('.preview-foto-container');
+                        const imgPreview = previewContainer.querySelector('img');
+
+                        imgPreview.src = dataUrlComprimida;
+                        previewContainer.style.display = 'block';
+                    }
+                    imgTemp.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removerFotoItem(button) {
+            const itemCard = button.closest('.item-card');
+            const previewContainer = itemCard.querySelector('.preview-foto-container');
+            const imgPreview = previewContainer.querySelector('img');
+            const inputFile = itemCard.querySelector('input[type="file"]');
+
+            imgPreview.src = '';
+            inputFile.value = '';
+            previewContainer.style.display = 'none';
+        }
+
+        // Função para recolher os dados e salvar no LocalStorage específico do Motorista do ASU-531
+        function finalizarChecklistMotorista() {
+            const categoriasGroups = document.querySelectorAll('.categoria-group');
+            let itensResultados = [];
+            let qtdAlterados = 0;
+            let naoConferidos = 0;
+
+            categoriasGroups.forEach(group => {
+                const tituloCategoriaEl = group.querySelector('.categoria-comp');
+                const nomeCategoria = tituloCategoriaEl ? tituloCategoriaEl.innerText.trim() : 'Geral';
+                const itensCards = group.querySelectorAll('.item-card');
+
+                itensCards.forEach(card => {
+                    const nomeItem = card.getAttribute('data-item');
+                    const btnOk = card.querySelector('.btn-status.ok');
+                    const btnAlt = card.querySelector('.btn-status.alt');
+                    const inputObs = card.querySelector('.input-obs');
+                    const imgPreview = card.querySelector('.preview-foto-container img');
+
+                    let statusItem = 'PENDENTE';
+                    if (btnOk.classList.contains('active')) statusItem = 'OK';
+                    if (btnAlt.classList.contains('active')) {
+                        statusItem = 'ALTERADO';
+                        qtdAlterados++;
+                    }
+
+                    if (statusItem === 'PENDENTE') naoConferidos++;
+
+                    let observacao = inputObs && inputObs.value.trim() !== '' ? inputObs.value.trim() : '-';
+                    let fotoBase64 = (imgPreview && imgPreview.src && imgPreview.src.startsWith('data:image')) ? imgPreview.src : null;
+
+                    itensResultados.push({
+                        categoria: nomeCategoria,
+                        nome: nomeItem,
+                        status: statusItem,
+                        observacao: observacao,
+                        foto: fotoBase64
+                    });
+                });
+            });
+
+            if (naoConferidos > 0) {
+                mostrarModal(
+                    'Pendência de Conferência',
+                    'Existem ' + naoConferidos + ' itens sem conferência (nem OK nem ALT selecionados). Por favor, verifique todos os itens antes de finalizar.',
+                    '⚠️'
+                );
+                return;
+            }
+
+            let statusGeralStr = qtdAlterados === 0 ? '100% OK' : qtdAlterados + ' Alteração(ões) Encontrada(s)';
+
+            const novoRegistro = {
+                viatura: 'ASU-531 (Motorista)',
+                responsavel: responsavelAtual,
+                dataHora: dataHoraAtual,
+                statusGeral: statusGeralStr,
+                itens: itensResultados
+            };
+
+            let historico = JSON.parse(localStorage.getItem('cbmsc_historico_conferencias')) || [];
+            historico.unshift(novoRegistro);
+            localStorage.setItem('cbmsc_historico_conferencias', JSON.stringify(historico));
+
+            mostrarModal(
+                'Sucesso Operacional',
+                'Checklist do ASU Motorista finalizado e salvo com sucesso!',
+                '✅',
+                function() {
+                    window.location.href = 'historico.html';
+                }
+            );
+        }
+    </script>
+</body>
+</html>
