@@ -250,7 +250,7 @@ function enviarWhatsAppIndex(index) {
     }
 
     const mensagemEncoded = encodeURIComponent(relatorioWp);
-    const numeroDestino = "5522997085774";
+    const numeroDestino = "554991776549";
     
     window.open('https://api.whatsapp.com/send?phone=' + numeroDestino + '&text=' + mensagemEncoded, '_blank');
 }
